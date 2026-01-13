@@ -187,7 +187,7 @@ export function EventMode({ onBack }: EventModeProps) {
                 option={option}
                 label={getLabel(index)}
                 isSelected={selectedAnswer === option}
-                isCorrect={answered && isCorrect && selectedAnswer === option}
+                isCorrect={answered && isCorrect && selectedAnswer === option ? true : undefined}
                 isWrong={answered && !isCorrect && selectedAnswer === option}
                 onClick={() => handleAnswerSelect(option)}
                 disabled={answered}

@@ -7,21 +7,24 @@ interface DifficultySelectorProps {
 }
 
 export function DifficultySelector({ onSelect }: DifficultySelectorProps) {
-  const difficulties: { level: Difficulty; label: string; description: string }[] = [
+  const difficulties: { level: Difficulty; label: string; description: string; color: string }[] = [
     {
       level: "beginner",
       label: "Beginner",
       description: "Simple loops, conditionals, and operators",
+      color: "#4ec9b0", // Teal/Green accent
     },
     {
       level: "intermediate",
       label: "Intermediate",
       description: "Nested logic, arrays, and modulo operations",
+      color: "#dcdcaa", // Yellow
     },
     {
       level: "advanced",
       label: "Advanced",
       description: "Methods, complex logic, and edge cases",
+      color: "#f48771", // Orange/Red
     },
   ]
 
@@ -38,16 +41,31 @@ export function DifficultySelector({ onSelect }: DifficultySelectorProps) {
             <button
               key={diff.level}
               onClick={() => onSelect(diff.level)}
-              className="w-full p-6 rounded-lg bg-card border-2 border-border hover:border-primary hover:bg-muted transition-all text-left group"
+              className="w-full p-6 rounded-lg bg-card border-2 hover:bg-muted transition-all text-left group"
+              style={{
+                borderColor: diff.color,
+                boxShadow: `0 0 12px ${diff.color}20`,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = `0 0 20px ${diff.color}40`
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = `0 0 12px ${diff.color}20`
+              }}
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                  <h2
+                    className="text-xl font-bold transition-colors group-hover:translate-x-1"
+                    style={{ color: diff.color }}
+                  >
                     {diff.label}
                   </h2>
                   <p className="text-muted-foreground text-sm mt-1">{diff.description}</p>
                 </div>
-                <div className="text-2xl group-hover:translate-x-1 transition-transform">→</div>
+                <div className="text-2xl group-hover:translate-x-1 transition-transform" style={{ color: diff.color }}>
+                  →
+                </div>
               </div>
             </button>
           ))}

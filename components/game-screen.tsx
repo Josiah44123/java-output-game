@@ -59,7 +59,7 @@ export function GameScreen({ difficulty, isEventMode, onBack }: GameScreenProps)
     return <div className="flex items-center justify-center min-h-screen">Loading...</div>
   }
 
-  const isCorrect = selectedAnswer && snippet && evaluateJavaOutput(selectedAnswer, snippet.correctOutput)
+  const isCorrect = selectedAnswer && snippet ? evaluateJavaOutput(selectedAnswer, snippet.correctOutput) : undefined
 
   return (
     <div className="min-h-screen bg-background">
