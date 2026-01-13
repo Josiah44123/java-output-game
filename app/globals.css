@@ -40,39 +40,39 @@
 }
 
 .dark {
-  /* Updated dark mode colors for developer theme */
-  --background: oklch(0.08 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.13 0 0);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.13 0 0);
-  --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.55 0.2 264);
-  --primary-foreground: oklch(0.95 0 0);
-  --secondary: oklch(0.18 0 0);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.25 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.65 0.2 120);
-  --accent-foreground: oklch(0.08 0 0);
-  --destructive: oklch(0.55 0.2 30);
-  --destructive-foreground: oklch(0.95 0 0);
-  --border: oklch(0.2 0 0);
-  --input: oklch(0.15 0 0);
-  --ring: oklch(0.55 0.2 264);
-  --chart-1: oklch(0.55 0.2 264);
-  --chart-2: oklch(0.65 0.2 120);
-  --chart-3: oklch(0.6 0.15 30);
-  --chart-4: oklch(0.5 0.2 300);
-  --chart-5: oklch(0.7 0.15 45);
-  --sidebar: oklch(0.12 0 0);
-  --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.55 0.2 264);
-  --sidebar-primary-foreground: oklch(0.95 0 0);
-  --sidebar-accent: oklch(0.25 0 0);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(0.2 0 0);
-  --sidebar-ring: oklch(0.55 0.2 264);
+  /* Updated to IDE dark mode inspired by VS Code/IntelliJ */
+  --background: #1e1e1e;
+  --foreground: #e0e0e0;
+  --card: #252526;
+  --card-foreground: #e0e0e0;
+  --popover: #252526;
+  --popover-foreground: #e0e0e0;
+  --primary: #569cd6;
+  --primary-foreground: #1e1e1e;
+  --secondary: #2d2d30;
+  --secondary-foreground: #e0e0e0;
+  --muted: #3e3e42;
+  --muted-foreground: #8b8b8b;
+  --accent: #4ec9b0;
+  --accent-foreground: #1e1e1e;
+  --destructive: #f48771;
+  --destructive-foreground: #1e1e1e;
+  --border: #3e3e42;
+  --input: #3e3e42;
+  --ring: #569cd6;
+  --chart-1: #569cd6;
+  --chart-2: #4ec9b0;
+  --chart-3: #dcdcaa;
+  --chart-4: #ce9178;
+  --chart-5: #d16969;
+  --sidebar: #1e1e1e;
+  --sidebar-foreground: #e0e0e0;
+  --sidebar-primary: #569cd6;
+  --sidebar-primary-foreground: #1e1e1e;
+  --sidebar-accent: #4ec9b0;
+  --sidebar-accent-foreground: #1e1e1e;
+  --sidebar-border: #3e3e42;
+  --sidebar-ring: #569cd6;
 }
 
 @theme inline {
@@ -121,28 +121,53 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-color: #1e1e1e;
+    background-image: radial-gradient(circle at 10% 30%, rgba(86, 156, 214, 0.08) 0%, transparent 25%),
+      radial-gradient(circle at 90% 70%, rgba(78, 201, 176, 0.05) 0%, transparent 25%),
+      radial-gradient(circle at 50% 50%, rgba(220, 220, 170, 0.03) 0%, transparent 30%);
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 15% 20%, rgba(86, 156, 214, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(78, 201, 176, 0.08) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body > * {
+    position: relative;
+    z-index: 1;
   }
 }
 
-/* Added syntax highlighting colors and animations */
+/* IDE-style syntax highlighting colors (VS Code theme) */
 .java-keyword {
-  color: oklch(0.65 0.2 264);
+  color: #569cd6;
 }
 
 .java-string {
-  color: oklch(0.65 0.2 120);
+  color: #ce9178;
 }
 
 .java-number {
-  color: oklch(0.7 0.15 45);
+  color: #b5cea8;
 }
 
 .java-comment {
-  color: oklch(0.5 0.1 220);
+  color: #6a9955;
 }
 
-/* Smooth fade-in animation for new questions */
+/* Fade-in animation for new questions */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -171,4 +196,21 @@
 
 .pulse-subtle {
   animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Glow effect for IDE-style buttons */
+@keyframes glow-ide {
+  0% {
+    box-shadow: inset 0 0 0 1px rgba(86, 156, 214, 0.5);
+  }
+  50% {
+    box-shadow: inset 0 0 0 1px rgba(86, 156, 214, 0.8);
+  }
+  100% {
+    box-shadow: inset 0 0 0 1px rgba(86, 156, 214, 0.5);
+  }
+}
+
+.glow-ide {
+  animation: glow-ide 2s ease-in-out infinite;
 }
