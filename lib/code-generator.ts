@@ -7,7 +7,6 @@ export interface JavaSnippet {
   pattern: string
 }
 
-// Store previously generated patterns to avoid repetition
 let lastPatterns: string[] = []
 
 function getRandomNumber(min: number, max: number): number {
