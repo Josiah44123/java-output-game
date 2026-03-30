@@ -14,7 +14,7 @@ export default function Page() {
   const [gameState, setGameState] = useState<GameState>("entrance")
   const [difficulty, setDifficulty] = useState<Difficulty>("beginner")
 
-  // Navigation Handlers
+ // Handlers for game state transitions
   const handleStartGame = () => setGameState("mode-select")
 
   const handleModeSelect = (mode: "classic" | "event") => {
