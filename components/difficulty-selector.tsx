@@ -10,7 +10,7 @@ import { twMerge } from "tailwind-merge"
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-
+// DifficultySelector component allows users to choose the difficulty level for the game. It features animated buttons with icons and descriptions for each difficulty level, enhancing user engagement and providing a clear choice for players.
 interface DifficultySelectorProps {
   onSelect: (difficulty: Difficulty) => void
 }
