@@ -9,7 +9,7 @@ import { twMerge } from "tailwind-merge"
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-
+//@ts-check
 const codeParticles = [
   "public static void main", "System.out.println();", "ArrayList<String> list",
   "if (x != null) {", "try { } catch (e)", "int[] numbers = new int[5];",
