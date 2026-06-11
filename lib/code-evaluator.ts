@@ -1,6 +1,6 @@
 export function evaluateJavaOutput(userAnswer: string, correctAnswer: string): boolean {
   // Normalize both strings: trim whitespace, handle multiple spaces
-  const normalize = (str: string) => str.trim().replace(/\s+/g, " ").toLowerCase()
+  const normalize = (str: string) => str.trim().replace(/\s+/g, " ")
 
   return normalize(userAnswer) === normalize(correctAnswer)
 }

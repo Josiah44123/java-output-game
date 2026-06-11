@@ -1,12 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import EntrancePage from "@/components/entrance-page"
-import { ModeSelection } from "@/components/mode-selection"
-import { DifficultySelector } from "@/components/difficulty-selector"
-import { GameScreen } from "@/components/game-screen"
-import { EventMode } from "@/components/event-mode"
+import dynamic from "next/dynamic"
 import type { Difficulty } from "@/lib/code-generator"
+
+// Dynamic imports for optimized bundle size
+const EntrancePage = dynamic(() => import("@/components/entrance-page"), { ssr: false })
+const ModeSelection = dynamic(() => import("@/components/mode-selection").then(mod => mod.ModeSelection), { ssr: false })
+const DifficultySelector = dynamic(() => import("@/components/difficulty-selector").then(mod => mod.DifficultySelector), { ssr: false })
+const GameScreen = dynamic(() => import("@/components/game-screen").then(mod => mod.GameScreen), { ssr: false })
+const EventMode = dynamic(() => import("@/components/event-mode").then(mod => mod.EventMode), { ssr: false })
 
 type GameState = "entrance" | "mode-select" | "difficulty-select" | "playing" | "event"
 

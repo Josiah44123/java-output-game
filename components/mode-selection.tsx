@@ -102,7 +102,20 @@ export function ModeSelection({ onSelectMode }: ModeSelectionProps) {
   )
 }
 
-function ModeCard({ title, description, icon: Icon, color, delay, onClick, isHovered, onHover, modeKey, features }: any) {
+interface ModeCardProps {
+  title: string
+  description: string
+  icon: React.ElementType
+  color: "cyan" | "purple"
+  delay: number
+  onClick: () => void
+  isHovered: boolean
+  onHover: (mode: "classic" | "event" | null) => void
+  modeKey: "classic" | "event"
+  features: string[]
+}
+
+function ModeCard({ title, description, icon: Icon, color, delay, onClick, isHovered, onHover, modeKey, features }: ModeCardProps) {
   const theme = color === "cyan" ? {
     border: "group-hover:border-cyan-500/50", glow: "bg-cyan-500", text: "group-hover:text-cyan-400", shadow: "shadow-cyan-500/20"
   } : {
