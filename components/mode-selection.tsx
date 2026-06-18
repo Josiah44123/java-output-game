@@ -130,22 +130,44 @@ function ModeCard({ title, description, icon: Icon, color, delay, onClick, isHov
       onClick={onClick}
       onMouseEnter={() => onHover(modeKey)}
       onMouseLeave={() => onHover(null)}
-      className={cn("group relative text-left h-full flex flex-col rounded-2xl bg-[#0a0a0c] border border-white/10 transition-all duration-500", theme.border, isHovered ? `scale-[1.02] ${theme.shadow} shadow-2xl` : "")}
+      className={cn(
+        "group relative text-left h-full flex flex-col rounded-2xl bg-[#0e0e11] border transition-all duration-500 overflow-hidden",
+        isHovered ? cn("border-transparent shadow-2xl", theme.shadow) : "border-white/10"
+      )}
     >
-      <div className={cn("absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-500", theme.glow)} />
+      <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500", theme.glow)} />
+      
+      {/* Corner Decorations */}
+      <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-white/10 group-hover:border-white/30 transition-colors" />
+      <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-white/10 group-hover:border-white/30 transition-colors" />
+
+      {/* Animated Gradient Border (visible on hover) */}
+      <div className={cn(
+        "absolute inset-0 p-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none",
+        "bg-gradient-to-br",
+        color === 'cyan' ? "from-cyan-500 via-transparent to-purple-500" : "from-purple-500 via-transparent to-pink-500"
+      )}>
+        <div className="w-full h-full rounded-2xl bg-[#0e0e11]" />
+      </div>
+
       <div className="relative p-8 flex flex-col h-full z-10">
         <div className="flex justify-between items-start mb-6">
-          <div className={cn("p-4 rounded-xl bg-white/5 transition-all duration-300", isHovered ? `${theme.glow} text-white` : "text-gray-400")}>
+          <div className={cn(
+            "p-4 rounded-xl transition-all duration-500 bg-white/5 border border-white/5", 
+            isHovered ? cn(theme.glow, "text-white scale-110 -rotate-6 shadow-lg") : "text-gray-500"
+          )}>
             <Icon size={32} />
           </div>
-          <ChevronRight className={cn("transition-transform duration-300 text-white/20", isHovered ? "translate-x-1 text-white" : "")} />
+          <ChevronRight className={cn("transition-all duration-500", isHovered ? "translate-x-1 text-white" : "text-white/10")} />
         </div>
-        <h3 className={cn("text-3xl font-bold text-white mb-2 transition-colors", theme.text)}>{title}</h3>
-        <p className="text-gray-400 mb-8 leading-relaxed">{description}</p>
+        
+        <h3 className={cn("text-3xl font-black mb-2 transition-colors uppercase tracking-tighter", isHovered ? "text-white" : "text-white/70")}>{title}</h3>
+        <p className="text-gray-500 text-sm font-mono mb-8 leading-relaxed uppercase tracking-wider">{description}</p>
+        
         <div className="mt-auto space-y-3">
           {features.map((feat: string, i: number) => (
-            <div key={i} className="flex items-center gap-3 text-sm text-gray-500 group-hover:text-gray-300 transition-colors">
-              <div className={cn("w-1.5 h-1.5 rounded-full", theme.glow)} />
+            <div key={i} className="flex items-center gap-3 text-[10px] font-mono uppercase tracking-[0.1em] text-white/20 group-hover:text-white/50 transition-colors">
+              <div className={cn("w-1.5 h-1.5 rounded-full", isHovered ? theme.glow : "bg-white/10")} />
               {feat}
             </div>
           ))}

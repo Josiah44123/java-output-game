@@ -64,7 +64,11 @@ export default function EntrancePage({ onStart }: EntrancePageProps) {
           className="relative group mt-8"
         >
           <div className={`absolute -inset-1 rounded-2xl bg-gradient-to-r from-cyan-600 to-purple-600 blur-xl opacity-50 transition duration-500 ${isHoveringStart ? "opacity-100 inset-[-5px]" : ""}`} />
-          <div className="relative flex items-center gap-4 px-12 py-6 bg-black rounded-2xl border-2 border-white/10 leading-none group-hover:border-cyan-500/50 transition-colors">
+          <div className="relative flex items-center gap-4 px-12 py-6 bg-black rounded-2xl border-2 border-white/10 leading-none group-hover:border-cyan-500/50 transition-colors overflow-hidden">
+            {/* Corner Decorations */}
+            <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-white/20 group-hover:border-cyan-500/50" />
+            <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-white/20 group-hover:border-cyan-500/50" />
+            
             <span className="text-3xl font-bold uppercase tracking-wide">Start Game</span>
             <Play size={28} fill="currentColor" className={isHoveringStart ? "text-cyan-400" : ""} />
           </div>

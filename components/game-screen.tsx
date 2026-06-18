@@ -139,56 +139,51 @@ export function GameScreen({ difficulty, isEventMode, onBack }: GameScreenProps)
                {/* Glow effect behind code card */}
                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-2xl blur-lg opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
                
-               <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#0e0e11] shadow-2xl">
-                 {/* Window Controls Decoration */}
-                 <div className="flex items-center gap-2 px-4 py-3 bg-white/5 border-b border-white/5">
-                   <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50" />
-                   <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
-                   <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50" />
-                   <span className="ml-2 text-xs font-mono text-white/30">Main.java</span>
-                 </div>
-                 
-                 {/* The Code Card Component */}
-                 <div className="p-1">
-                    <CodeCard code={snippet.code} />
-                 </div>
-               </div>
+               <CodeCard code={snippet.code} />
             </div>
 
             {/* --- Feedback Section (Animated) --- */}
             <AnimatePresence mode="wait">
               {answered && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
                   className={cn(
-                    "relative overflow-hidden p-6 rounded-xl border backdrop-blur-md transition-colors duration-500",
+                    "relative overflow-hidden p-6 rounded-xl border backdrop-blur-md transition-all duration-500",
                     isCorrect 
-                      ? "bg-green-500/10 border-green-500/30" 
-                      : "bg-red-500/10 border-red-500/30"
+                      ? "bg-green-500/5 border-green-500/30 shadow-[0_0_20px_rgba(34,197,94,0.1)]" 
+                      : "bg-red-500/5 border-red-500/30 shadow-[0_0_20px_rgba(239,68,68,0.1)]"
                   )}
                 >
-                  <div className="flex items-start gap-4">
+                  {/* Decorative Scanline */}
+                  <div className="absolute inset-0 bg-[linear-gradient(transparent_0%,rgba(255,255,255,0.03)_50%,transparent_100%)] bg-[size:100%_4px] animate-scanline pointer-events-none" />
+
+                  <div className="flex items-start gap-6 relative z-10">
                     <div className={cn(
-                      "p-3 rounded-full shadow-lg",
+                      "p-4 rounded-xl shadow-2xl",
                       isCorrect ? "bg-green-500 text-black" : "bg-red-500 text-white"
                     )}>
-                      {isCorrect ? <CheckCircle2 size={24} /> : <XCircle size={24} />}
+                      {isCorrect ? <CheckCircle2 size={28} /> : <XCircle size={28} />}
                     </div>
                     
                     <div className="flex-1">
-                      <h3 className={cn(
-                        "text-xl font-bold mb-1",
-                        isCorrect ? "text-green-400" : "text-red-400"
-                      )}>
-                        {isCorrect ? "Compilation Successful!" : "Runtime Error (Incorrect)"}
-                      </h3>
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className={cn(
+                          "text-2xl font-black uppercase tracking-tighter",
+                          isCorrect ? "text-green-400" : "text-red-400"
+                        )}>
+                          {isCorrect ? "EXECUTION_SUCCESS" : "COMPILATION_ERROR"}
+                        </h3>
+                        <span className="text-[10px] font-mono opacity-40">REF_ID: {Math.random().toString(16).slice(2, 8).toUpperCase()}</span>
+                      </div>
                       
                       {!isCorrect && (
-                        <div className="flex items-center gap-2 text-sm mt-2 mb-3 bg-black/30 p-2 rounded border border-red-500/20">
-                          <span className="text-gray-400">Expected Output:</span>
-                          <span className="font-mono text-green-400 font-bold">{snippet.correctOutput}</span>
+                        <div className="mb-4">
+                           <p className="text-xs font-mono text-red-400/70 mb-1 uppercase tracking-wider">Correct Output Required:</p>
+                           <div className="inline-block px-3 py-1 bg-green-500/20 border border-green-500/40 rounded font-mono text-green-400 font-bold">
+                             {snippet.correctOutput}
+                           </div>
                         </div>
                       )}
 
@@ -196,11 +191,17 @@ export function GameScreen({ difficulty, isEventMode, onBack }: GameScreenProps)
                         <motion.div 
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
-                          transition={{ delay: 0.2 }}
-                          className="text-sm text-gray-300 leading-relaxed border-t border-white/5 pt-3 mt-2"
+                          transition={{ delay: 0.3 }}
+                          className="space-y-3"
                         >
-                          <span className="text-cyan-400 font-bold text-xs uppercase tracking-wider block mb-1">Debugger Analysis:</span>
-                          {getExplanation(snippet.code, snippet.correctOutput)}
+                          <div className="flex items-center gap-2">
+                            <div className="h-[1px] flex-1 bg-white/10" />
+                            <span className="text-[10px] font-black text-cyan-400 uppercase tracking-widest">Debugger_Notes</span>
+                            <div className="h-[1px] flex-1 bg-white/10" />
+                          </div>
+                          <p className="text-sm text-gray-400 leading-relaxed font-mono">
+                            {getExplanation(snippet.code, snippet.correctOutput)}
+                          </p>
                         </motion.div>
                       )}
                     </div>
@@ -253,20 +254,27 @@ export function GameScreen({ difficulty, isEventMode, onBack }: GameScreenProps)
             {/* Next Question Button */}
             {answered && (
               <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
                 className="mt-auto pt-6"
               >
                 <button
                   onClick={loadNewQuestion}
-                  className="w-full group relative overflow-hidden rounded-xl bg-white text-black font-bold py-4 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full group relative overflow-hidden rounded-xl bg-cyan-500 text-black font-black py-4 transition-all hover:bg-cyan-400 active:scale-[0.98] shadow-[0_0_20px_rgba(6,182,212,0.4)]"
                 >
-                   <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                   <div className="relative flex items-center justify-center gap-2 group-hover:text-white transition-colors">
-                     <RotateCcw size={20} className="group-hover:rotate-180 transition-transform duration-500" />
-                     <span>INITIALIZE NEXT SNIPPET</span>
+                   {/* Techy Button Decorations */}
+                   <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-white/40" />
+                   <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-white/40" />
+                   
+                   <div className="relative flex items-center justify-center gap-3 uppercase tracking-widest text-sm">
+                     <RotateCcw size={18} className="group-hover:rotate-180 transition-transform duration-700" />
+                     <span>Recompile & Continue</span>
                    </div>
                 </button>
+                
+                <p className="text-[10px] text-center text-cyan-500/50 mt-3 font-mono uppercase tracking-[0.2em]">
+                  Status: Ready_for_next_instruction
+                </p>
               </motion.div>
             )}
           </div>
