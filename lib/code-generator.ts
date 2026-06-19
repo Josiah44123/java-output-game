@@ -120,7 +120,7 @@ const generators: Record<Difficulty, Record<string, PatternGenerator>> = {
     },
   },
 }
-// Ensures we don't repeat the same pattern too frequently  
+
 function generateUniquePattern(difficulty: Difficulty, patterns: string[]): string {
   const availablePatterns = Object.keys(generators[difficulty])
   const available = availablePatterns.filter((p) => !patterns.includes(p))
