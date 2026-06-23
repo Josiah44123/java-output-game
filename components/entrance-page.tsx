@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Play, Terminal, Coffee, Code } from "lucide-react"
-import { clsx, type ClassValue } from "clsx" // Fixed the import typo here
+import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
 function cn(...inputs: ClassValue[]) {
