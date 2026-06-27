@@ -6,7 +6,7 @@ import { Code2, Cpu, Flame, ChevronRight, Terminal } from "lucide-react"
 import type { Difficulty } from "@/lib/code-generator"
 import { cn } from "@/lib/utils"
 
-// DifficultySelector component allows users to choose the difficulty level for the game.
+// allows users to choose the difficulty level for the game.
 interface DifficultySelectorProps {
   onSelect: (difficulty: Difficulty) => void
 }
