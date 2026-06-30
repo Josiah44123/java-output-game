@@ -182,7 +182,7 @@ export function EventMode({ onBack }: EventModeProps) {
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 py-8">
         
-        {/* Header with Timer */}
+        {}
         <header className="flex items-center justify-between mb-10">
           <div className="flex items-center gap-4">
             <button
