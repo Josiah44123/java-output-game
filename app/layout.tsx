@@ -12,7 +12,9 @@ export const metadata: Metadata = {
   description: "Test your Java knowledge by guessing code output",
 
 }
-
+// export const metadata: Metadata = {
+//   title: {
+//     default: "Guess the Java Output",
 export default function RootLayout({
   children,
 }: Readonly<{
