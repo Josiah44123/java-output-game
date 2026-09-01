@@ -2,18 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { Play, Terminal, Coffee, Code } from "lucide-react"
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
-
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
-
-const codeParticles = [
-  "public static void main", "System.out.println();", "ArrayList<String> list",
-  "if (x != null) {", "try { } catch (e)", "int[] numbers = new int[5];",
-]
+import { Play, Terminal } from "lucide-react"
 
 interface EntrancePageProps {
   onStart: () => void

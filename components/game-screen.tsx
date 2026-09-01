@@ -7,13 +7,7 @@ import { evaluateJavaOutput, generateMultipleChoiceOptions, getExplanation } fro
 import { CodeCard } from "./code-card"
 import { AnswerOption } from "./answer-option"
 import { RotateCcw, ArrowLeft, Trophy, Terminal, CheckCircle2, XCircle } from "lucide-react"
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
-
-// Utility for merging classes
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
+import { cn } from "@/lib/utils"
 
 interface GameScreenProps {
   difficulty: Difficulty
