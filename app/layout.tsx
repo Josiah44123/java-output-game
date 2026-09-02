@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Guess the Java Output",
   description: "Test your Java knowledge by guessing code output",
 }
-
+ 
 export default function RootLayout({
   children,
 }: Readonly<{

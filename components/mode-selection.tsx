@@ -3,7 +3,13 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Gamepad2, Timer, Terminal, ChevronRight, ScanLine, BrainCircuit } from "lucide-react"
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
 import { cn } from "@/lib/utils"
+
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
 
 interface ModeSelectionProps {
   onSelectMode: (mode: "classic" | "event") => void
